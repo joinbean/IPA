@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +44,42 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        // Catch not found exception for shop routes and return API friendly error message.
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/shops/*')) {
+                return response()->json([
+                    'message' => 'Shop-Datensatz nicht gefunden.'
+                ], 404);
+            }
+        });
+
+        // Catch not found exception for product routes and return API friendly error message.
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/products/*')) {
+                return response()->json([
+                    'message' => 'Produktdatensatz nicht gefunden.'
+                ], 404);
+            }
+        });
+
+        // Catch not found exception for order routes and return API friendly error message.
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/orders/*')) {
+                return response()->json([
+                    'message' => 'Bestelldatensatz nicht gefunden.'
+                ], 404);
+            }
+        });
+
+        // Catch not found exception for orderProduct routes and return API friendly error message.
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/orderProducts/*')) {
+                return response()->json([
+                    'message' => 'Bestellter Produktdatensatz nicht gefunden.'
+                ], 404);
+            }
         });
     }
 }

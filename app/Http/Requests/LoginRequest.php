@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProductRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'shop_id' => 'exists:App\Models\Shop,id',
-            'name' => 'max:255',
-            'image' => 'nullable|sometimes|image'
+            'email' => 'required|email',
+            'password' => 'required|string'
         ];
     }
 
@@ -36,9 +35,10 @@ class UpdateProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'shop_id.exists' => 'Shopdatensatz nicht gefunden',
-            'name.max' => 'Ein Name kann maximal 255 Zeichen lang sein',
-            'image.image' => 'Muss eine Bilddatei sein',
+            'email.required' => 'Eine E-Mail Adresse ist erforderlich',
+            'email.email' => 'Die E-Mail Adresse ist im falschen Format',
+            'password.required' => 'Ein Passwort ist erforderlich',
+            'password.string' => 'Ein Passwort muss ein String sein',
         ];
     }
 }

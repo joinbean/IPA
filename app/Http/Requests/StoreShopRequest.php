@@ -22,6 +22,19 @@ class StoreShopRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|max:255',
+            'link' => 'required|max:255'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
             'name.required' => 'Ein Name ist erforderlich',
             'name.max' => 'Ein Name kann maximal 255 Zeichen lang sein',
             'link.required' => 'Ein Link ist erforderlich',

@@ -5,6 +5,20 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * @OA\Schema(
+ * @OA\Xml(name="Shops"),
+ * @OA\Property(property="id", type="integer", readOnly="true", example="1"),
+ * @OA\Property(property="name", type="string", maxLength=32, example="Digitec"),
+ * @OA\Property(property="link", type="string", maxLength=32, example="www.digitec.ch"),
+ * @OA\Property(property="products", type="array", collectionFormat="multi",
+ *      @OA\Items(ref="#/components/schemas/ProductResource"),
+ * ),
+ * )
+ *
+ */
+
 class ShopResource extends JsonResource
 {
     /**

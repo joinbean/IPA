@@ -12,7 +12,30 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/orders",
+     *      operationId="getOrders",
+     *      tags={"order"},
+     *      summary="Get all orders",
+     *      description="Returns list of orders",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="orders", type="array", collectionFormat="multi",
+     *                  @OA\Items(ref="#/components/schemas/OrderResource"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index()
     {

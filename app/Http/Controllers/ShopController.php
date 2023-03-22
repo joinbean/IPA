@@ -11,7 +11,31 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/api/shops",
+     *      operationId="getStores",
+     *      tags={"shop"},
+     *      summary="Get all stores",
+     *      description="Returns list of stores",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="shops", type="array", collectionFormat="multi",
+     *                  @OA\Items(ref="#/components/schemas/ShopResource"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index()
     {
@@ -20,7 +44,47 @@ class ShopController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="/api/shops",
+     *      operationId="storeStore",
+     *      tags={"shop"},
+     *      summary="Create new store",
+     *      description="Creates one new store",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Enter shop Data",
+     *          @OA\JsonContent(
+     *              required={"name", "link"},
+     *              @OA\Property(property="name", type="string", example="Digitec"),
+     *              @OA\Property(property="link", type="string", example="www.digitec.ch"),
+     *          ),
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  type="object",
+     *                  required={"name", "link"},
+     *                  @OA\Property(property="name", type="string", example="Digitec"),
+     *                  @OA\Property(property="link", type="string", example="www.digitec.ch"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="shop", ref="#/components/schemas/ShopResource",),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function store(StoreShopRequest $request)
     {
@@ -30,7 +94,40 @@ class ShopController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/api/shops/{shopId}",
+     *      operationId="showStore",
+     *      tags={"shop"},
+     *      summary="Show one store",
+     *      description="Get one store by it's id",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\Parameter(
+     *          description="ID of shop",
+     *          in="path",
+     *          name="shopId",
+     *          required=true,
+     *          example="1",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="shop", ref="#/components/schemas/ShopResource",),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function show(Shop $shop)
     {
@@ -38,7 +135,47 @@ class ShopController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *      path="/api/shops/{shopId}",
+     *      operationId="updateStore",
+     *      tags={"shop"},
+     *      summary="Update a store",
+     *      description="Update the parameters of a store",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\Parameter(
+     *          description="ID of shop",
+     *          in="path",
+     *          name="shopId",
+     *          required=true,
+     *          example="1",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          ),
+     *      ),
+     *      @OA\RequestBody(
+     *          description="Enter shop Data",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="name", type="string", example="Digitec"),
+     *              @OA\Property(property="link", type="string", example="www.digitec.ch"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="shop", ref="#/components/schemas/ShopResource",),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function update(UpdateShopRequest $request, Shop $shop)
     {
@@ -48,7 +185,37 @@ class ShopController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *      path="/api/shops/{shopId}",
+     *      operationId="deleteStore",
+     *      tags={"shop"},
+     *      summary="Delete one store",
+     *      description="Delete one store by it's id",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\Parameter(
+     *          description="ID of shop",
+     *          in="path",
+     *          name="shopId",
+     *          required=true,
+     *          example="1",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function destroy(Shop $shop)
     {

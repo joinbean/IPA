@@ -44,7 +44,45 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="/api/orders",
+     *      operationId="storeOrders",
+     *      tags={"order"},
+     *      summary="Create new order",
+     *      description="Creates one new order",
+     *      security={ {"bearerAuth": {} }},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Enter order Data",
+     *          @OA\JsonContent(
+     *              required={"note", "ordered_at"},
+     *              @OA\Property(property="note", type="string", example="Is super important!"),
+     *              @OA\Property(property="ordered_at", type="string", format="date", example="2000-02-02"),
+     *              @OA\Property(property="orderProducts", type="array", collectionFormat="multi",
+     *                  @OA\Items(
+     *                      @OA\Property(property="product_id", type="integer", example="1"),
+     *                      @OA\Property(property="volume", type="integer", example="10"),
+     *                      @OA\Property(property="price", type="integer", example="100"),
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="order", ref="#/components/schemas/OrderResource",),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function store(StoreOrderRequest $request)
     {

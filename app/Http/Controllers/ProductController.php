@@ -324,7 +324,7 @@ class ProductController extends Controller
      */
     public function sortShop()
     {
-        return response(ProductResource::collection(Product::all())->sortBy('shop.name'));
+        return response(ProductResource::collection(Product::all())->sortBy('shop.name')->values());
     }
 
     /**

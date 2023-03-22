@@ -59,15 +59,6 @@ class ShopController extends Controller
      *              @OA\Property(property="name", type="string", example="Digitec"),
      *              @OA\Property(property="link", type="string", example="www.digitec.ch"),
      *          ),
-     *          @OA\MediaType(
-     *              mediaType="multipart/form-data",
-     *              @OA\Schema(
-     *                  type="object",
-     *                  required={"name", "link"},
-     *                  @OA\Property(property="name", type="string", example="Digitec"),
-     *                  @OA\Property(property="link", type="string", example="www.digitec.ch"),
-     *              ),
-     *          ),
      *      ),
      *      @OA\Response(
      *          response=200,

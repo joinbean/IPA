@@ -86,15 +86,15 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "422": {
+                        "description": "Unprocessable Content",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "The route could not be found"
+                                            "example": "Die E-Mail Adresse ist im falschen Format"
                                         }
                                     },
                                     "type": "object"
@@ -964,7 +964,7 @@
                 ]
             }
         },
-        "/products": {
+        "/api/products": {
             "get": {
                 "tags": [
                     "product"
@@ -1004,9 +1004,7 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/products": {
+            },
             "post": {
                 "tags": [
                     "product"
@@ -1479,6 +1477,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
                     }
                 },
                 "security": [
@@ -1530,6 +1531,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -1599,6 +1603,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -1636,6 +1643,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [

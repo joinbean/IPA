@@ -193,7 +193,7 @@
                 }
             }
         },
-        "/orders": {
+        "/api/orders": {
             "get": {
                 "tags": [
                     "order"
@@ -227,10 +227,13 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                }
-            }
-        },
-        "/api/orders": {
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "order"
@@ -315,7 +318,370 @@
                 ]
             }
         },
-        "/orderProducts": {
+        "/api/orders/{orderId}": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Show one order",
+                "description": "Get one order by it's id",
+                "operationId": "showOrder",
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order": {
+                                            "$ref": "#/components/schemas/OrderResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Update a order",
+                "description": "Update the parameters of a order",
+                "operationId": "updateOrder",
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter order Data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "note": {
+                                        "type": "string",
+                                        "example": "Important note about order!"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order": {
+                                            "$ref": "#/components/schemas/OrderResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Delete one order",
+                "description": "Delete one order by it's id",
+                "operationId": "deleteOrder",
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/sort/date/old": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all orders oldest first",
+                "description": "Returns list of orders ordered ascending by date",
+                "operationId": "getOrdersByDateOld",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderResource"
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/sort/date/new": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all orders newest first",
+                "description": "Returns list of orders ordered descending by date",
+                "operationId": "getOrdersByDateNew",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderResource"
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/sort/status": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all orders ordered by status",
+                "description": "Returns list of orders ordered by status",
+                "operationId": "getOrdersBystatus",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderResource"
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/filter/status/open": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all orders filtered by open status",
+                "description": "Returns list of orders filtered by open status",
+                "operationId": "getOrdersBystatusOpen",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderResource"
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/filter/status/closed": {
+            "get": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all orders filtered by closed status",
+                "description": "Returns list of orders filtered by closed status",
+                "operationId": "getOrdersBystatusClosed",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderResource"
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orderProducts": {
             "get": {
                 "tags": [
                     "orderProduct"
@@ -349,7 +715,253 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "orderProduct"
+                ],
+                "summary": "Create new ordered product",
+                "description": "Creates one new ordered product",
+                "operationId": "storeOrderProducts",
+                "requestBody": {
+                    "description": "Enter ordered product Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "order_id",
+                                    "product_id",
+                                    "volume",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "order_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "volume": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "20"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orderProduct": {
+                                            "$ref": "#/components/schemas/OrderProductWithOrderResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orderProducts/{orderProductId}": {
+            "get": {
+                "tags": [
+                    "orderProduct"
+                ],
+                "summary": "Show one ordered product",
+                "description": "Get one ordered product by it's id",
+                "operationId": "showOrderProduct",
+                "parameters": [
+                    {
+                        "name": "orderProductId",
+                        "in": "path",
+                        "description": "ID of ordered product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orderProduct": {
+                                            "$ref": "#/components/schemas/OrderProductWithOrderResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "orderProduct"
+                ],
+                "summary": "Update ordered product",
+                "description": "Updates one ordered product",
+                "operationId": "updateOrderProducts",
+                "parameters": [
+                    {
+                        "name": "orderProductId",
+                        "in": "path",
+                        "description": "ID of ordered product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter ordered product Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "order_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "volume": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "20"
+                                    },
+                                    "recieved_at": {
+                                        "type": "string",
+                                        "example": "2012-12-21"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "orderProduct": {
+                                            "$ref": "#/components/schemas/OrderProductWithOrderResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "orderProduct"
+                ],
+                "summary": "Delete one ordered product",
+                "description": "Delete one ordered product by it's id",
+                "operationId": "deleteOrderProduct",
+                "parameters": [
+                    {
+                        "name": "orderProductId",
+                        "in": "path",
+                        "description": "ID of ordered product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/products": {
@@ -1038,6 +1650,42 @@
         "schemas": {
             "OrderProductResource": {
                 "properties": {
+                    "product": {
+                        "$ref": "#/components/schemas/ProductResource"
+                    },
+                    "recieved_at": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "null"
+                    },
+                    "volume": {
+                        "type": "integer",
+                        "example": 25
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 100
+                    },
+                    "price_total": {
+                        "type": "integer",
+                        "example": 2500
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "OrderProducts"
+                }
+            },
+            "OrderProductWithOrderResource": {
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "order_note": {
+                        "type": "string",
+                        "example": "This is a note!"
+                    },
                     "product": {
                         "$ref": "#/components/schemas/ProductResource"
                     },

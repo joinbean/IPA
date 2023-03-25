@@ -221,6 +221,10 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=404,
      *          description="Not Found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content"
      *      )
      *     )
      */

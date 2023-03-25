@@ -309,6 +309,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
                     }
                 },
                 "security": [
@@ -425,6 +428,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -462,6 +468,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -1062,6 +1071,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
                     }
                 },
                 "security": [
@@ -1113,6 +1125,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -1228,6 +1243,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "security": [
@@ -1646,6 +1664,9 @@
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
                     }
                 },
                 "security": [

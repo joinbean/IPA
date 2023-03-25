@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => [
                 'required',
                 'string',
@@ -43,7 +43,6 @@ class RegisterRequest extends FormRequest
             'name.string' => 'Ein Name muss ein String sein',
             'name.max' => 'Ein Name kann maximal 255 Zeichen lang sein',
             'email.required' => 'Eine E-Mail Adresse ist erforderlich',
-            'email.string' => 'Eine E-Mail Adresse muss ein String sein',
             'email.email' => 'Die E-Mail Adresse ist im falschen Format',
             'email.max' => 'Eine E-Mail Adresse kann maximal 255 Zeichen lang sein',
             'email.unique' => 'Diese E-Mail Adresse existiert bereits',

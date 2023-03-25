@@ -59,15 +59,6 @@ class ShopController extends Controller
      *              @OA\Property(property="name", type="string", example="Digitec"),
      *              @OA\Property(property="link", type="string", example="www.digitec.ch"),
      *          ),
-     *          @OA\MediaType(
-     *              mediaType="multipart/form-data",
-     *              @OA\Schema(
-     *                  type="object",
-     *                  required={"name", "link"},
-     *                  @OA\Property(property="name", type="string", example="Digitec"),
-     *                  @OA\Property(property="link", type="string", example="www.digitec.ch"),
-     *              ),
-     *          ),
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -83,7 +74,11 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
-     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content"
+     *      ),
      *     )
      */
     public function store(StoreShopRequest $request)
@@ -126,6 +121,10 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */
@@ -174,6 +173,10 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */
@@ -214,6 +217,10 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */

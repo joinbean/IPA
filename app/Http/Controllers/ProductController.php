@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/products",
+     *      path="/api/products",
      *      operationId="getProducts",
      *      tags={"product"},
      *      summary="Get all products",
@@ -81,6 +81,10 @@ class ProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content"
      *      )
      *     )
      */
@@ -135,6 +139,10 @@ class ProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */
@@ -248,6 +256,10 @@ class ProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */
@@ -324,7 +336,7 @@ class ProductController extends Controller
      */
     public function sortShop()
     {
-        return response(ProductResource::collection(Product::all())->sortBy('shop.name'));
+        return response(ProductResource::collection(Product::all())->sortBy('shop.name')->values());
     }
 
     /**

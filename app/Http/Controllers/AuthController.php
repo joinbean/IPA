@@ -58,13 +58,13 @@ class AuthController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response=404,
-     *          description="Not Found",
+     *          response=422,
+     *          description="Unprocessable Content",
      *          @OA\JsonContent(
      *              @OA\Property(
      *                  property="message",
      *                  type="string",
-     *                  example="The route could not be found"
+     *                  example="Die E-Mail Adresse ist im falschen Format"
      *              ),
      *          ),
      *      ),

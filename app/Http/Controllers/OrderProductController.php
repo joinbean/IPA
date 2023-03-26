@@ -76,6 +76,10 @@ class OrderProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content"
      *      )
      *     )
      */
@@ -171,6 +175,10 @@ class OrderProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content"
      *      )
      *     )
      */
@@ -211,6 +219,10 @@ class OrderProductController extends Controller
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
      *      )
      *     )
      */

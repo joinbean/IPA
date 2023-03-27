@@ -173,6 +173,7 @@ class ProductController extends Controller
      *      @OA\RequestBody(
      *          required=true,
      *          description="Enter product Data",
+     *          _method="PUT"
      *          @OA\MediaType(
      *              mediaType="multipart/form-data",
      *              @OA\Schema(
